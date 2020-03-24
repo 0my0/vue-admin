@@ -1,0 +1,51 @@
+<template>
+  <div id="app">
+    <div class="websock_test">
+
+    </div>
+    <router-view />
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data() {
+    return{
+      websock:null
+    }
+  },
+  created() {
+    this.initWebSocket();
+  },
+  methods: {
+    initWebSocket() {
+      const wsuri = "ws://47.91.87.125:2346?token=123";
+      this.websock = new WebSocket(wsuri);
+      this.websock.onmessage = this.websocketonmessage;
+      this.websock.onopen = this.websocketonopen;
+      this.websock.onerror = this.websocketonerror;
+      this.websock.onclose = this.websocketclose;
+    },
+    websocketonmessage(e) {
+      //SOCKET收到信息
+      const redata = JSON.parse(e.data);
+      console.log(redata)
+    },
+    websocketonopen() {
+      console.log('发送数据')
+      let actions = {"data":"12345"};
+      this.websocketsend(JSON.stringify(actions));
+    },
+    websocketonerror() {
+      this.initWebSocket();
+    },
+    websocketsend(Data){
+      this.websock.send(Data);
+    },
+    websocketclose(e){
+      console.log('断开连接',e)
+    }
+  }
+}
+</script>

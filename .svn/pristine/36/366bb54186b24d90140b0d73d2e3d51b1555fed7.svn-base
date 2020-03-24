@@ -1,0 +1,432 @@
+<template>
+  <div>
+    <el-tabs type="border-card">
+      <el-tab-pane label="用户管理">
+        <el-form :inline="true">
+          <el-form-item label="订单号:">
+            <span class="text">{{tableData.order_number}}</span>
+          </el-form-item>
+          <el-form-item label="所属网站:">
+            <span class="text">{{tableData.site_name}}</span>
+          </el-form-item>
+          <el-form-item label="游戏及服务器:">
+            <span class="text">{{tableData.service}}</span>
+          </el-form-item>
+          <el-form-item label="优惠券:">
+            <span class="text">{{tableData.coupon}}</span>
+          </el-form-item>
+          <el-form-item label="订单数量:">
+            <span class="text">{{tableData.num}}</span>
+          </el-form-item>
+          <el-form-item label="订单总额:">
+            <span class="text">{{tableData.amount}}</span>
+          </el-form-item>
+          <el-form-item label="折扣额:">
+            <span class="text">{{tableData.youhui}}</span>
+          </el-form-item>
+          <el-form-item label="货币类型:">
+            <span class="text">{{tableData.country_id}}</span>
+          </el-form-item>
+          <el-form-item label="交易方式:">
+            <span class="text">面对面</span>
+          </el-form-item>
+          <el-form-item label="第三方流水号:">
+            <span class="text">{{tableData.order_no}}</span>
+          </el-form-item>
+          <el-form-item label="订单状态:">
+            <span class="text">{{tableData.status_name}}</span>
+          </el-form-item>
+          <el-form-item label="创建时间:">
+            <span class="text">{{tableData.dateline}}</span>
+          </el-form-item>
+          <el-form-item label="创建IP:">
+            <span class="text">{{tableData.clientip}}</span>
+          </el-form-item>
+          <el-form-item label="创建IP国家:">
+            <span class="text">{{tableData.last_ip_area}}</span>
+          </el-form-item>
+        </el-form>
+        <el-form :inline="true">
+          <el-form-item label="支付方式:">
+            <span class="text">{{tableData.payment}}</span>
+          </el-form-item>
+          <el-form-item label="状态:">
+            <span class="text">{{isHidden("log","pay_smg","payment_status")}}</span>
+          </el-form-item>
+          <el-form-item label="实付金额:">
+            <span class="text">{{isHidden("log","pay_smg","payment_gross")}}</span>
+          </el-form-item>
+          <el-form-item label="手续费:">
+            <span class="text">{{isHidden("log","pay_smg","payment_fee")}}</span>
+          </el-form-item>
+          <el-form-item label="到款时间:">
+            <span class="text">{{isHidden("log","pay_smg","payment_date")}}</span>
+          </el-form-item>
+          <el-form-item label="付款邮箱:">
+            <span class="text">{{isHidden("log","pay_smg","payer_email")}}</span>
+          </el-form-item>
+          <el-form-item label="付款编号:">
+            <span class="text">{{isHidden("log","pay_smg","payer_id")}}</span>
+          </el-form-item>
+          <el-form-item label="付款人全名:">
+            <span class="text">{{isHidden("log","pay_smg","address_name")}}</span>
+          </el-form-item>
+          <el-form-item label="付款人国家:">
+            <span class="text">{{isHidden("log","pay_smg","address_country")}}</span>
+          </el-form-item>
+          <el-form-item label="付款人省份:">
+            <span class="text">{{isHidden("log","pay_smg","address_state")}}</span>
+          </el-form-item>
+          <el-form-item label="付款人城市:">
+            <span class="text">{{isHidden("log","pay_smg","address_city")}}</span>
+          </el-form-item>
+        </el-form>
+        <el-form :inline="true">
+          <el-form-item label="浏览器:">
+            <span class="text">{{isHidden("log","desc","User_Agent")}}</span>
+          </el-form-item>
+          <el-form-item label="来源URL:">
+            <span class="text">{{isHidden("log","clientip","")}}</span>
+          </el-form-item>
+        </el-form>
+        <el-form :inline="true">
+          <el-form-item label="客户邮件:">
+            <span class="text">{{tableData.email}}</span>
+          </el-form-item>
+          <el-form-item label="客户全名:">
+            <span class="text">{{tableData.frist_name}}</span>
+          </el-form-item>
+          <el-form-item label="联系电话:">
+            <span class="text">{{tableData.mobile}}</span>
+          </el-form-item>
+          <el-form-item label="客户备注:">
+            <div class="text">
+              <div v-for="(val,key) in dataArr2">
+                {{val}}
+              </div>
+            </div>
+          </el-form-item>
+        </el-form>
+        <el-tabs type="card" v-model="activeName">
+          <el-tab-pane label="订单日志" name="first">
+            <el-form :inline="true" :model="formInline">
+              <el-form-item label="日志内容">
+                <el-input v-model="formInline.note" autocomplete="off" style="width: 738px"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" @click="addOrderLog">添加</el-button>
+              </el-form-item>
+            </el-form>
+            <div class="log-table">
+              <el-table
+                border
+                :data="tableList"
+                style="width: 55%">
+                <el-table-column
+                  label="创建时间"
+                  sortable
+                  prop="dateline">
+                </el-table-column>
+                <el-table-column
+                  label="内容"
+                  sortable
+                  prop="note">
+                </el-table-column>
+                <el-table-column
+                  label="创建人"
+                  sortable
+                  prop="admin_name">
+                </el-table-column>
+              </el-table>
+            </div>
+
+          </el-tab-pane>
+          <el-tab-pane label="电话邮件日志" name="second">
+            <div class="log-table">
+              <el-table
+                border
+                :data="emailList"
+                style="width: 55%">
+                <el-table-column
+                  label="创建时间"
+                  sortable
+                  prop="dateline">
+                </el-table-column>
+                <el-table-column
+                  label="内容"
+                  sortable
+                  prop="content">
+                </el-table-column>
+                <el-table-column
+                  label="操作用户"
+                  sortable
+                  prop="admin_name">
+                </el-table-column>
+              </el-table>
+            </div>
+          </el-tab-pane>
+          <el-tab-pane label="付款记录" name="third">
+            <div class="log-table" v-if="payData">
+              <el-table
+                border
+                :data="payData"
+                style="width: 100%"
+               >
+                <el-table-column
+                  label="支付编号"
+                  sortable
+                  prop="order_no">
+                </el-table-column>
+                <el-table-column
+                  label="内容"
+                  sortable
+                  prop="content">
+                </el-table-column>
+                <el-table-column
+                  label="支付金额"
+                  sortable
+                  prop="amount">
+                </el-table-column>
+                <el-table-column
+                  label="货币代码"
+                  sortable
+                  prop="country_id">
+                </el-table-column>
+                <el-table-column
+                  label="手续费"
+                  sortable
+                  prop="free">
+                </el-table-column>
+                <el-table-column
+                  label="付款状态"
+                  sortable
+                  prop="payer_status">
+                </el-table-column>
+                <el-table-column
+                  label="收款帐号"
+                  sortable
+                  prop="business">
+                </el-table-column>
+                <el-table-column
+                  label="到款时间"
+                  sortable
+                  prop="payment_date">
+                </el-table-column>
+                <el-table-column
+                  label="付款人帐号"
+                  sortable
+                  prop="payer_email">
+                </el-table-column>
+                <el-table-column
+                  label="付款人名"
+                  sortable
+                  prop="address_name">
+                </el-table-column>
+              </el-table>
+            </div>
+          </el-tab-pane>
+          <el-tab-pane label="产品信息" name="fourth">
+            <div class="log-table" v-if="goodsData">
+              <el-table
+                border
+                :data="goodsData"
+                style="width: 100%"
+              >
+                <el-table-column
+                  label="产品名称"
+                  sortable
+                  prop="title">
+                </el-table-column>
+                <el-table-column
+                  label="产品单价"
+                  sortable
+                  prop="price">
+                </el-table-column>
+                <el-table-column
+                  label="产品数量"
+                  sortable
+                  prop="num">
+                </el-table-column>
+                <el-table-column
+                  label="SKU信息"
+                  sortable
+                  prop="sku">
+                </el-table-column>
+              </el-table>
+            </div>
+          </el-tab-pane>
+          <el-tab-pane label="验证截图" name="fifth">
+            <div class="log-table">
+              <el-upload
+                class="upload-demo"
+                drag
+                ref="upload"
+                :action="uploadActionUrl()"
+                :on-success="handlePreview"
+                multiple>
+                <i class="el-icon-upload"></i>
+                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+
+              </el-upload>
+              <div v-for="(val,index) in tableData.img_list" style="display: inline-block">
+                <img v-bind:src="val.img" style="" @click="imgClick($event)" class="img">
+              </div>
+            </div>
+          </el-tab-pane>
+        </el-tabs>
+      </el-tab-pane>
+      <el-tab-pane label="验证信息">
+        <el-row>
+          <span>历史订单</span>
+        </el-row>
+      </el-tab-pane>
+    </el-tabs>
+  </div>
+</template>
+
+<script>
+  import Sales from '@/api/sales'
+  import { getToken} from  '@/utils/auth'
+  import toJsonData from '@/api/jsonformdata'
+  export default {
+    name:'gold-order-detail',
+    data() {
+      return{
+        formLabelWidth:'90px',
+        token:getToken(),
+        orderId:'',
+        tableData:'',
+        descData:[],
+        dataArr2:[],
+        formInline: {
+          note:''
+        },
+        tableList:[],
+        emailList:[],
+        payData:[],
+        goodsData:[],
+        activeName:'first',
+        uploadData: {
+          dataType: "0",
+          oldFilePath:""
+        },
+      }
+    },
+    methods:{
+        getOrderDetail(){
+          Sales.getOrderDetail(this.orderId,this.token).then(data => {
+            this.tableData = data.data;
+            this.tableList = this.tableData.list
+            this.emailList = this.tableData.email_list;
+            this.payData = this.tableData.payed;
+            this.goodsData = this.tableData.goods;
+            if (this.tableData.log) {
+              if(this.tableData.log.desc) {
+                for(let key in this.tableData.log.desc){
+                  const value = this.tableData.log.desc[key];
+                  const Obj ={};
+                  Obj[key] = value
+                  this.dataArr2 = this.dataArr2.concat(JSON.stringify(Obj).replace("{","").replace("}","").replace('"',"").replace('"',"").split('</br>'));
+                }
+              }
+            }
+
+          })
+        },
+      imgClick($event) {
+          console.log($event)
+        if($event.currentTarget.className=='img'){
+          $event.currentTarget.className='img open';
+        }else{
+          $event.currentTarget.className='img';
+        }
+      },
+      uploadActionUrl() {
+          // this.getOrderDetail();
+          return 'order/upload/order_id/'+this.orderId+'/token/'+this.token
+      },
+      handlePreview() {
+          this.getOrderDetail();
+      },
+      isHidden(a,b,c) {
+       let data1 = this.tableData[a];
+          if(data1) {
+            let data2 = this.tableData[a][b];
+            if(data2) {
+              let data3 = this.tableData[a][b][c];
+              if (data3) {
+                return  data3
+              }else{
+                data3=''
+              }
+            }else {
+              data2 ='';
+            }
+          }else {
+            data1 = ''
+          }
+      },
+      addOrderLog() {
+          const postData = toJsonData.JsonData(this.formInline);
+          Sales.addOrderLog(postData,this.orderId,this.token).then(data => {
+            this.$message({
+              message: data.data.log,
+              type: 'success'
+            })
+            this.getOrderDetail();
+            this.formInline={
+              note:''
+            }
+          })
+      }
+    },
+    beforeRouteLeave(to, from, next) {
+      if (to.name == 'goldOrderManager') {
+        to.meta.isUseCache = true;
+      }
+      next();
+    },
+    watch: {
+      $route: {
+        handler: function(route) {
+          this.orderId = this.$route.query.id;
+        },
+        immediate: true
+      }
+    },
+    created() {
+      this.getOrderDetail();
+    }
+  }
+</script>
+
+<style scoped>
+  .text{
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    min-height: 26px;
+    min-width: 50px;
+    display: inline-block;
+  }
+  .el-form-item{
+    margin-bottom: 10px;
+  }
+  .log-table{
+    border: 1px solid #DCDFE6;
+    padding: 10px;
+    min-height: 500px;
+  }
+  .img{
+    max-width: 200px;
+    margin-right: 20px
+  }
+  .img.open{
+    max-width: 100%;
+    cursor: zoom-out;
+  }
+</style>
+<style>
+  .el-form-item--medium .el-form-item__content{
+    line-height: 26px !important;
+  }
+</style>

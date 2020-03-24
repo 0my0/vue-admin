@@ -1,0 +1,12 @@
+<template>
+  <div id="app">
+    <router-view />
+  </div>
+</template>
+
+<script>
+  import notification from 'notification-koro1';
+export default {
+  name: 'App',
+}
+</script>

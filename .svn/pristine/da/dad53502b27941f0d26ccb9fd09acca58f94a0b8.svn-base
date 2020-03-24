@@ -1,0 +1,335 @@
+<template>
+  <div class="app-container">
+    <div>
+      <el-form :inline="true" :model="formInline" class="demo-form-inline" @submit.native.prevent>
+        <el-form-item label="开始时间" >
+          <el-date-picker
+            v-model="formInline.stime"
+            type="datetime"
+            placeholder="开始时间"
+          >
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="结束时间" :label-width="formLabelWidth">
+          <el-date-picker
+            v-model="formInline.ltime"
+            type="datetime"
+            placeholder="结束时间"
+            :picker-options="pickerOptionsEnd">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="选择站点" :label-width="formLabelWidth">
+          <template>
+            <el-popover
+              placement="bottom"
+              width="100"
+              trigger="click">
+              <el-checkbox :indeterminate="isIndeterminate" v-model="checSitekAll" @change="handleCheckAllChange">全选</el-checkbox>
+              <el-checkbox-group v-model="formInline.site_id" @change="handleCheckedSiteChange">
+                <el-checkbox :label="val.site_id" :value="val.site_id" v-for="(val,key) in siteData">{{val.site_name}}</el-checkbox>
+              </el-checkbox-group>
+              <el-button slot="reference">选择站点</el-button>
+            </el-popover>
+          </template>
+        </el-form-item>
+        <el-form-item label="选择游戏" :label-width="formLabelWidth">
+          <template>
+            <el-popover
+              placement="bottom"
+              width="250"
+              trigger="click"
+          >
+              <el-checkbox :indeterminate="isIndeterminate" v-model="checkGameAll" @change="handleCheckGameAllChange">全选</el-checkbox>
+              <el-checkbox-group v-model="formInline.games" >
+                <el-checkbox :label="val.game_id" :value="val.game_id" v-for="(val,key) in gameData">{{val.title}}</el-checkbox>
+              </el-checkbox-group>
+              <el-button slot="reference">选择游戏</el-button>
+            </el-popover>
+          </template>
+        </el-form-item>
+        <el-form-item label="付款方式" :label-width="formLabelWidth">
+          <template>
+            <el-popover
+              placement="bottom"
+              width="250"
+              trigger="click"
+            >
+              <el-checkbox :indeterminate="isIndeterminate" v-model="checkPaymentAll" @change="handleCheckPaymentAllChange">全选</el-checkbox>
+              <el-checkbox-group v-model="formInline.code">
+                <el-checkbox :label="val.code" :value="val.code" v-for="(val,key) in paymentData">{{val.name}}</el-checkbox>
+              </el-checkbox-group>
+              <el-button slot="reference">选择付款方式</el-button>
+            </el-popover>
+          </template>
+        </el-form-item>
+        <el-form-item  label="选择">
+          <el-select v-model="formInline.which_select" @change="changeSelect">
+            <el-option :label="val.title" :value="val.name" v-for="(val,key) in selectData">{{val.title}}</el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-input v-model="formInline.select_value" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-checkbox v-model="formInline.is_coupon">Coupon</el-checkbox>
+        </el-form-item>
+        <el-form-item v-for="(val,key) in statusData">
+          <el-checkbox-group v-model="formInline.status" >
+            <el-checkbox :label="val.id" :value="val.id" >{{val.val}}</el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+
+        <el-form-item>
+          <el-button type="primary" @click="searchOrder">查询</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
+    <div>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[50, 100, 200, 500,1000]"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="totalCount">
+      </el-pagination>
+    </div>
+    <div>
+      <el-table
+        :data="tableData"
+        border
+        style="width: 100%">
+        <el-table-column
+          label="序列号"
+          prop="id">
+        </el-table-column>
+        <el-table-column
+          label="订单号"
+          prop="order_no">
+        </el-table-column>
+        <el-table-column
+          label="订单状态"
+          prop="status">
+        </el-table-column>
+        <el-table-column
+          label="支付方式"
+          prop="payment">
+        </el-table-column>
+        <el-table-column
+          label="站点名称"
+          prop="site_name">
+        </el-table-column>
+        <el-table-column
+          label="订单金额"
+          prop="amount">
+        </el-table-column>
+        <el-table-column
+          label="角色名"
+          prop="frist_name">
+        </el-table-column>
+        <el-table-column
+          label="邮箱"
+          prop="email">
+        </el-table-column>
+        <el-table-column
+          label="创建时间"
+          prop="dateline">
+        </el-table-column>
+      </el-table>
+    </div>
+
+  </div>
+</template>
+
+<script>
+  import SystemManager from  '@/api/system-manager'
+  import Sales from '@/api/sales'
+  import { getToken} from  '@/utils/auth'
+  import toJsonData from '@/api/jsonformdata'
+  export default {
+    name:'gold-order-manager',
+    data() {
+      return{
+        formInline: {
+          stime: '',
+          ltime:'',
+          site_id:[],
+          games: '',
+          code:[],
+          which_select:'',
+          select_value:'',
+          is_coupon:false,
+          status:[]
+        },
+        currentPage:1,
+        totalCount: 1,
+        pageSize:50,
+        tableData:[],
+        statusData:[],
+        token:getToken(),
+        checSitekAll: false,
+        checkGameAll:false,
+        checkPaymentAll:false,
+        isIndeterminate: true,
+        formLabelWidth:'130px',
+        dialogTableVisible:false,
+        siteData: [],
+        gameData:[],
+        selectData: [
+          {
+            title: '玩家邮箱',
+            name:'email'
+          },
+          {
+            title: '订单号',
+            name:'orderno'
+          },
+          {
+            title:'付款邮箱',
+            name:'pay_email'
+          },
+          {
+            title:'付款姓名',
+            name:'name'
+          },
+          {
+            title:'Coupon',
+            name:'coupon'
+          }
+        ],
+        paymentData:[],
+        pickerOptionsStart: {
+          disabledDate:time => {
+            const endDateVal = new Date(this.formInline.ltime).getTime()
+            if (endDateVal) {
+              return time.getTime() > endDateVal - 0
+            }
+            return  time.getTime() < Date.now()-8.64e7;
+          }
+        },
+        pickerOptionsEnd: {
+          disabledDate: time => {
+            const beginDateVal = new Date(this.formInline.stime).getTime()
+            if (beginDateVal) {
+              return time.getTime() < beginDateVal - 0
+            }
+          }
+        }
+      }
+    },
+    methods: {
+      handleCheckAllChange(val) {
+        const siteId = [];
+        this.siteData.forEach(item => {
+          siteId.push(item.site_id);
+        })
+        this.formInline.site_id = val ? siteId : [];
+        this.isIndeterminate = false;
+      },
+      handleSizeChange(val) {
+        this.pageSize = val;
+        this.searchLimitOrder(val);
+      },
+      searchLimitOrder(val){
+        const postData = toJsonData.JsonData(this.formInline);
+        Sales.searchLimitOrder(postData,val,this.currentPage,this.token).then(data => {
+          this.tableData = data.data;
+          this.totalCount = parseInt(data.count)
+        })
+      },
+      handleCurrentChange(val) {
+        this.currentPage = val
+        this.searchPageOrder(val);
+      },
+      searchPageOrder(val) {
+        const postData = toJsonData.JsonData(this.formInline);
+        Sales.searchLimitOrder(postData,this.pageSize,val,this.token).then(data => {
+          this.tableData = data.data;
+          this.totalCount = parseInt(data.count)
+        })
+      },
+      handleCheckGameAllChange(val) {
+        const games = [];
+        this.gameData.forEach(item => {
+          games.push(item.game_id);
+        })
+        this.formInline.games = val ? games : [];
+        this.isIndeterminate = false;
+      },
+      handleCheckPaymentAllChange(val){
+        const code = [];
+        this.paymentData.forEach(item => {
+          code.push(item.code);
+        })
+        this.formInline.code= val ? code:[];
+        this.isIndeterminate = false;
+      },
+      changeSelect() {
+
+      },
+      searchOrder() {
+        const postData = toJsonData.JsonData(this.formInline);
+        this.currentPage = 1;
+        Sales.searchOrder(postData,this.token).then(data => {
+          this.tableData = data.data;
+          this.totalCount = parseInt(data.count)
+        })
+      },
+      getAllstatus() {
+        Sales.getAllstatus(this.token).then(data => {
+            this.statusData = data.data
+        })
+      },
+      handleCheckedSiteChange(value) {
+        // let checkedCount = value.length;
+        // this.checSitekAll = checkedCount === this.siteData.length;
+        // this.isIndeterminate = checkedCount > 0 && checkedCount < this.siteData.length;
+      },
+      getGameIndex() {
+        this.formInline.games = [];
+        SystemManager.getGameIndex(this.token).then(data => {
+          this.gameData=data.data
+        })
+      },
+      getSiteIndex() {
+        SystemManager.getSiteIndex(this.token).then(data => {
+          this.siteData=data.data
+        })
+      },
+      getPaymentMethod() {
+        SystemManager.getPaymentMethod(this.token).then(data => {
+          this.paymentData = data.data;
+        })
+      },
+      getOrderIndex() {
+        Sales.getOrderIndex(this.token).then(data => {
+          this.tableData = data.data;
+          this.totalCount = parseInt(data.count)
+        })
+      }
+    },
+    created() {
+      this.getSiteIndex();
+      this.getGameIndex();
+      this.getPaymentMethod();
+      this.getAllstatus();
+      this.getOrderIndex();
+      // this.formInline.which_select = this.selectData[0].title;
+    }
+  }
+</script>
+
+<style>
+   .el-popper{
+    max-height: 300px;
+    overflow-y:scroll;
+    overflow-x: visible;
+  }
+   .el-checkbox{
+    display: block;
+  }
+   .el-pagination{
+     margin-bottom: 20px;
+   }
+</style>

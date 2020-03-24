@@ -1,0 +1,27 @@
+<template>
+  <div>
+    123
+  </div>
+</template>
+
+<script>
+  export default {
+    name:'gold-order-detail',
+    data() {
+      return{
+
+      }
+    },
+    methods:{
+
+    },
+    beforeRouteLeave (to, from, next) {
+      console.log(9999)
+      if (to.name == 'gold-order-manager') {
+       console.log(1234)
+        to.meta.isUseCache = true;
+      }
+      next();
+    }
+  }
+</script>

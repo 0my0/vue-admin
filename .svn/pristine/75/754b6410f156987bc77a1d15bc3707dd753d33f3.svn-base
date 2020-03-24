@@ -1,0 +1,65 @@
+{
+  "_from": "notification-koro1",
+  "_id": "notification-koro1@1.1.1",
+  "_inBundle": false,
+  "_integrity": "sha512-aDDL8vYXsTpM80g7qyKW7sChBOEcLV6ToMiJnpwMJGrVBGuhIp+MbUEdCOQZoySqL2KtArG8PBiIrsVveKJylg==",
+  "_location": "/notification-koro1",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "notification-koro1",
+    "name": "notification-koro1",
+    "escapedName": "notification-koro1",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/notification-koro1/-/notification-koro1-1.1.1.tgz",
+  "_shasum": "7f3ca42e345becc7b0709b0bb6f5893ba0552fcc",
+  "_spec": "notification-koro1",
+  "_where": "E:\\vueProject\\admin\\vue-element-admin",
+  "author": {
+    "name": "OBKoro1",
+    "email": "obkoro1@foxmail.com",
+    "url": "http://obkoro1.com/"
+  },
+  "bugs": {
+    "url": "https://github.com/OBKoro1/notification-Koro1/issues",
+    "email": "obkoro1@foxmail.com"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "(浏览器桌面通知)Html5 Notification npm包",
+  "homepage": "http://obkoro1.com/web_accumulate/accumulate/",
+  "keywords": [
+    "HTML5 Notification",
+    "web Notification",
+    "Web notification",
+    "H5 notification",
+    "H5 Notification",
+    "notification npm",
+    "npm notification",
+    "Notification npm",
+    "npm Notification",
+    "HTML5",
+    "Notification",
+    "OBKoro1"
+  ],
+  "license": "MIT",
+  "main": "./src/main.js",
+  "name": "notification-koro1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OBKoro1/notification-Koro1.git"
+  },
+  "scripts": {
+    "d": "bash deploy.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.1.1"
+}

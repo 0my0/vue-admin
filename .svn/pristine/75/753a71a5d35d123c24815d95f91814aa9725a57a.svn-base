@@ -1,0 +1,236 @@
+<template>
+  <div class="app-container">
+    <el-row>
+      <el-button type="primary" icon="el-icon-plus" @click="handleAddSite">添加站点</el-button>
+      <el-dialog title="添加/修改人员" :visible.sync="dialogEditFormVisible" :title="dialogType==='add'?'添加站点':'修改站点'">
+        <el-form :model="editSiteForm">
+          <el-form-item label="站点名称" :label-width="formLabelWidth">
+            <el-input v-model="editSiteForm.site_name" autocomplete="off" :disabled="dialogType==='edit'? true: false"></el-input>
+          </el-form-item>
+          <el-form-item label="站点域名" :label-width="formLabelWidth">
+            <el-input v-model="editSiteForm.site_url" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="站点业务" :label-width="formLabelWidth">
+            <el-checkbox-group v-model="editSiteForm.yewu">
+              <el-checkbox v-for="(val, key) in siteBusiness" :label="val.yewu"></el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogEditFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="createSite">确 定</el-button>
+        </div>
+      </el-dialog>
+    </el-row>
+    <el-table
+      :data="tableData"
+      border
+      @row-contextmenu="rightClick"
+      :row-class-name="rowClassName"
+      style="width: 100%">
+      <el-table-column
+        label="操作"
+        width="180"
+        >
+        <template slot-scope="scope">
+          <span class="game-config">
+            <span @click="gameConfigLink(scope.$index, scope.row)">游戏配置</span>
+          </span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="site_name"
+        label="名称">
+      </el-table-column>
+      <el-table-column
+        prop="yewu"
+        label="业务">
+      </el-table-column>
+      <el-table-column
+        prop="site_url"
+        label="域名">
+      </el-table-column>
+    </el-table>
+    <ul v-show="optionVisible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
+      <li @click="handleEditSite">修改选择站点</li>
+      <li @click="deleteSite">删除选择站点</li>
+    </ul>
+<!--    <router-view></router-view>-->
+  </div>
+
+</template>
+<script>
+  import SystemManager from  '@/api/system-manager'
+  import { getToken} from  '@/utils/auth'
+  import toJsonData from '@/api/jsonformdata'
+  export default {
+    name: 'web-config',
+    data() {
+      return {
+        tableData: [],
+        gameConfig: [],
+        dialogEditFormVisible: false,
+        optionVisible: false,
+        dialogType: 'add',
+        formLabelWidth: '120px',
+        top: 0,
+        left: 0,
+        siteId: '',
+        editSiteForm: {
+          site_name: '',
+          site_url: '',
+          yewu: []
+        },
+        siteBusiness: [
+          {
+            'yewu': '销售'
+          },
+          {
+            'yewu': '采购'
+          },
+          {
+            'yewu': '资源'
+          }
+        ],
+        token: getToken()
+      }
+    },
+    methods: {
+      getSiteIndex() {
+        SystemManager.getSiteIndex(this.token).then(data => {
+          this.tableData=data.data
+        })
+      },
+      rowClassName({row, rowIndex}) {
+        row.id = rowIndex;
+      },
+      gameConfigLink(index,row){
+        // console.log(row)
+        this.siteId = this.tableData[row.id].site_id
+        this.$router.push({
+          path: "/system/game-config",
+          query: {
+            id: this.siteId
+          }
+        })
+      },
+      createSite() {
+        const postData = toJsonData.JsonData(this.editSiteForm);
+        const isAdd = this.dialogType === 'add'
+        if(isAdd) {
+          SystemManager.createSite(postData,this.token).then(data => {
+            this.$message({
+              message: data.data.log,
+              type: 'success'
+            })
+            this.getSiteIndex();
+            this.closeDialog();
+          }).catch(error => {
+            console.log(error)
+          })
+        }else{
+          SystemManager.editSite(postData,this.siteId,this.token).then(data => {
+            this.$message({
+              message: data.data.log,
+              type: 'success'
+            })
+            this.getSiteIndex();
+            this.closeDialog();
+          }).catch(error => {
+            console.log(error)
+          })
+        }
+        this.editSiteForm={
+          site_name: '',
+          site_url: '',
+          yewu: []
+        }
+      },
+      deleteSite() {
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          SystemManager.deleteSite(this.siteId, this.token).then(data => {
+            this.$message({
+              message:data.data.log,
+              type: 'success'
+            })
+            this.getSiteIndex();
+            this.closeDialog();
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      },
+      rightClick(row, column, e) {
+       console.log(row)
+        e.preventDefault();
+        this.publicMenu(e)
+        this.siteId = row.site_id;
+        this.editSiteForm = {
+          'site_name': row.site_name,
+          site_url: row.site_url,
+          yewu: (row.yewu).split(",")
+        },
+        this.editSiteForm.site_name = row.site_name
+        this.optionVisible = true
+      },
+      publicMenu(e){
+        const menuMinWidth = 105
+        const offsetLeft = this.$el.getBoundingClientRect().left // container margin left
+        const offsetWidth = this.$el.offsetWidth // container width
+        const maxLeft = offsetWidth - menuMinWidth // left boundary
+        const left = e.clientX - offsetLeft + 15 // 15: margin right
+        if (left > maxLeft) {
+          this.left = maxLeft
+        } else {
+          this.left = left
+        }
+        this.top = e.pageY - 80
+      },
+      handleAddSite() {
+        this.dialogType = 'add'
+        this.dialogEditFormVisible = true
+        this.editSiteForm={
+          site_name: '',
+          site_url: '',
+          yewu: []
+        }
+      },
+      handleEditSite() {
+        this.dialogType = 'edit'
+        this.dialogEditFormVisible = true
+      },
+      closeDialog() {
+        this.dialogEditFormVisible = false;
+      },
+      closeMenu() {
+        this.optionVisible = false
+      }
+    },
+    created(){
+      this.getSiteIndex();
+    },
+    watch: {
+      optionVisible(value) {
+        if(value) {
+          document.body.addEventListener('click', this.closeMenu)
+        }else{
+          document.body.removeEventListener('click', this.closeMenu)
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  .el-row{
+    margin-bottom: 30px;
+  }
+</style>
+

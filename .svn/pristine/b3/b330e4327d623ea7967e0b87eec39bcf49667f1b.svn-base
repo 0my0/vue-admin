@@ -1,0 +1,782 @@
+<template>
+  <div class="app-container">
+    <div>
+      <el-form :inline="true" :model="formInline" class="demo-form-inline" @submit.native.prevent>
+        <el-form-item label="开始时间" >
+          <el-date-picker
+            v-model="formInline.stime"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="开始时间"
+          >
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="结束时间" :label-width="formLabelWidth">
+          <el-date-picker
+            v-model="formInline.ltime"
+            type="datetime"
+            placeholder="结束时间"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            :picker-options="pickerOptionsEnd"
+          >
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="选择站点" :label-width="formLabelWidth">
+          <template>
+            <el-popover
+              placement="bottom"
+              width="100"
+              trigger="click">
+              <el-checkbox :indeterminate="isIndeterminate" v-model="checSitekAll" @change="handleCheckAllChange">全选</el-checkbox>
+              <el-checkbox-group v-model="formInline.site_id" @change="handleCheckedSiteChange">
+                <el-checkbox :label="val.site_id" :value="val.site_id" v-for="(val,key) in siteData">{{val.site_name}}</el-checkbox>
+              </el-checkbox-group>
+              <el-button slot="reference">选择站点</el-button>
+            </el-popover>
+          </template>
+        </el-form-item>
+        <el-form-item label="选择游戏" :label-width="formLabelWidth">
+          <template>
+            <el-popover
+              placement="bottom"
+              width="250"
+              trigger="click"
+          >
+              <el-checkbox :indeterminate="isIndeterminate" v-model="checkGameAll" @change="handleCheckGameAllChange">全选</el-checkbox>
+              <el-checkbox-group v-model="formInline.games" >
+                <el-checkbox :label="val.game_id" :value="val.game_id" v-for="(val,key) in gameData">{{val.title}}</el-checkbox>
+              </el-checkbox-group>
+              <el-button slot="reference">选择游戏</el-button>
+            </el-popover>
+          </template>
+        </el-form-item>
+        <el-form-item label="付款方式" :label-width="formLabelWidth">
+          <template>
+            <el-popover
+              placement="bottom"
+              width="250"
+              trigger="click"
+            >
+              <el-checkbox :indeterminate="isIndeterminate" v-model="checkPaymentAll" @change="handleCheckPaymentAllChange">全选</el-checkbox>
+              <el-checkbox-group v-model="formInline.code">
+                <el-checkbox :label="val.code" :value="val.code" v-for="(val,key) in paymentData">{{val.name}}</el-checkbox>
+              </el-checkbox-group>
+              <el-button slot="reference">选择付款方式</el-button>
+            </el-popover>
+          </template>
+        </el-form-item>
+        <el-form-item  label="选择">
+          <el-select v-model="formInline.which_select" @change="changeSelect">
+            <el-option :label="val.title" :value="val.name" v-for="(val,key) in selectData">{{val.title}}</el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-input v-model="formInline.select_value" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-checkbox v-model="formInline.is_coupon">Coupon</el-checkbox>
+        </el-form-item>
+        <el-form-item v-for="(val,key) in statusData">
+          <el-checkbox-group v-model="formInline.status" >
+            <el-checkbox :label="val.id" :value="val.id" >{{val.val}}</el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+
+        <el-form-item>
+          <el-button type="primary" @click="searchOrder">查询</el-button>
+          <el-button type="primary" @click="printOrder">打印</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
+
+    <div class="pagination-part">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[50, 100, 200, 500,1000]"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="totalCount">
+      </el-pagination>
+      <div class="order-part">
+        <span>
+          订单总额：{{orderAmount}} (其中: {{usdAmount}} {{audAmount}} {{cadAmount}} {{eurAmount}}, 优惠金额: {{youhuiAmount}})
+        </span>
+      </div>
+    </div>
+
+    <div class="table-div">
+      <el-table
+        :data="tableData"
+        border
+        :row-class-name="tableRowClassName"
+        @row-contextmenu="rightClick"
+        style="width: 100%">
+        <el-table-column
+          label="序列号"
+          sortable
+          prop="id">
+        </el-table-column>
+        <el-table-column
+          label="订单号"
+          sortable
+          prop="order_number"
+          >
+          <template slot-scope="scope">
+            <span class="game-config">
+
+              <span @click="goldDeatilLink(scope.$index, scope.row)" style="color: blue;cursor: pointer">{{ scope.row.order_number }}</span>
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="流水号"
+          sortable
+          prop="order_no">
+        </el-table-column>
+        <el-table-column
+          label="订单状态"
+          sortable
+          prop="status">
+        </el-table-column>
+        <el-table-column
+          label="游戏服务器"
+          sortable
+          prop="service">
+        </el-table-column>
+        <el-table-column
+          label="支付方式"
+          sortable
+          prop="payment">
+        </el-table-column>
+        <el-table-column
+          label="站点名称"
+          sortable
+          prop="site_name">
+        </el-table-column>
+        <el-table-column
+          label="订单金额"
+          sortable
+          prop="amount">
+        </el-table-column>
+        <el-table-column
+          label="角色名"
+          sortable
+          prop="frist_name">
+        </el-table-column>
+        <el-table-column
+          label="邮箱"
+          sortable
+          prop="email">
+        </el-table-column>
+        <el-table-column
+          label="签收人"
+          sortable
+          prop="admin_name">
+        </el-table-column>
+        <el-table-column
+          label="创建时间"
+          sortable
+          prop="dateline">
+        </el-table-column>
+      </el-table>
+      <ul v-show="optionVisible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
+        <li @click="signOrder" :class="isDisabled==true?'isDisabled':''">签收</li>
+        <li @click="handleSignOrder" :class="isDisabled==true?'isDisabled':''">签收并处理</li>
+        <li @click="freedOrder":class="isFreed==true?'isFreed':''">释放</li>
+        <li @click="mandatoryReceiptOrder" :class="mandatoryReceipt==true?'mandatoryReceipt':''">强制签收</li>
+        <li @click="handleOrder" :class="isFreed==true?'isFreed':''">处理</li>
+        <li @click="payOrder" :class="isOrderPay==true?'isOrderPay':''">付款</li>
+        <li @click="sendPost">发送邮件</li>
+      </ul>
+
+      <el-dialog title="新邮件" :visible.sync="dialogEditFormVisible">
+        <el-form :model="editMailForm">
+          <el-form-item label="订单号" :label-width="formLabelWidth">
+            <el-input v-model="editMailForm.order_number" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="收件人" :label-width="formLabelWidth">
+            <el-input v-model="editMailForm.email" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="主题" :label-width="formLabelWidth">
+            <el-input v-model="editMailForm.title" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="内容" :label-width="formLabelWidth">
+            <quill-editor
+              v-model="editMailForm.content"
+              ref="myQuillEditor"
+            >
+            </quill-editor>
+          </el-form-item>
+
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogEditFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="sendMail">确 定</el-button>
+        </div>
+      </el-dialog>
+    </div>
+
+    <div>
+      <el-dialog title="金币订单处理" :visible.sync="dialogTableVisible">
+        <el-form :model="handleOrderForm">
+          <el-form-item label="订单号" :label-width="formLabelWidth">
+            <el-input v-model="handleOrderForm.order_number" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="流水号" :label-width="formLabelWidth">
+            <el-input v-model="handleOrderForm.order_no" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="游戏服务器" :label-width="formLabelWidth">
+            <el-input v-model="handleOrderForm.service" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="订单总额" :label-width="formLabelWidth">
+            <el-input v-model="handleOrderForm.amount" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="处理方式" :label-width="formLabelWidth" v-if="dialogTableType==='handle'">
+            <el-radio-group v-model="handleOrderForm.status">
+              <el-radio v-for="(val, key) in handleStatusData" :label="val"></el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="备注" :label-width="formLabelWidth">
+            <el-input v-model="handleOrderForm.note" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogTableVisible = false">取 消</el-button>
+          <el-button type="primary" @click="handleGoldOrder">确 定</el-button>
+        </div>
+      </el-dialog>
+
+    </div>
+
+  </div>
+</template>
+
+<script>
+  import { quillEditor } from 'vue-quill-editor'
+  import SystemManager from  '@/api/system-manager'
+  import Sales from '@/api/sales'
+  import { getToken} from  '@/utils/auth'
+  import toJsonData from '@/api/jsonformdata'
+  let date = new Date(new Date().toLocaleDateString());
+  let data1 =  new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000);
+  let date_value = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+  let date1_value = data1.getFullYear() + '-' + (data1.getMonth() + 1) + '-' + data1.getDate() + ' ' + data1.getHours() + ':' + data1.getMinutes() + ':' + data1.getSeconds();
+  export default {
+    name:'gold-order-manager',
+    data() {
+      return{
+        formInline: {
+          stime: date_value,
+          ltime: date1_value,
+          site_id:[],
+          games: '',
+          code:[],
+          which_select:'',
+          select_value:'',
+          is_coupon:false,
+          status:[]
+        },
+        editMailForm:{
+          order_number:'',
+          email:'',
+          title:'',
+          content:''
+        },
+        editorOption:{},
+        optionVisible: false,
+        isDisabled:false,
+        isFreed:true,
+        mandatoryReceipt:true,
+        orderAmount:'',
+        usdAmount:'',
+        cadAmount:'',
+        audAmount:'',
+        eurAmount:'',
+        youhuiAmount:'',
+        currentPage:1,
+        totalCount: 1,
+        pageSize:50,
+        tableData:[],
+        statusData:[],
+        token:getToken(),
+        checSitekAll: false,
+        checkGameAll:false,
+        checkPaymentAll:false,
+        isIndeterminate: true,
+        isOrderPay:true,
+        dialogEditFormVisible: false,
+        formLabelWidth:'130px',
+        adminId:'',
+        dialogTableVisible:false,
+        dialogTableType: 'handle',
+        left: '0px',
+        top: '0px',
+        siteData: [],
+        gameData:[],
+        orderId:'',
+        selectData: [
+          {
+            title: '玩家邮箱',
+            name:'email'
+          },
+          {
+            title: '流水号',
+            name:'orderno'
+          },
+          {
+            title: '订单号',
+            name:'order_number'
+          },
+          {
+            title:'付款邮箱',
+            name:'pay_email'
+          },
+          {
+            title:'付款姓名',
+            name:'name'
+          },
+          {
+            title:'Coupon',
+            name:'coupon'
+          }
+        ],
+        handleOrderForm:{
+          order_number:'',
+          amount:'',
+          status:'',
+          note:'',
+          order_no:'',
+          service:''
+        },
+        handleStatusData:[],
+        paymentData:[],
+        pickerOptionsStart: {
+          disabledDate:time => {
+            const endDateVal = new Date(this.formInline.ltime).getTime()
+            if (endDateVal) {
+              return time.getTime() > endDateVal - 0
+            }
+            return  time.getTime() < Date.now()-8.64e7;
+          }
+        },
+        pickerOptionsEnd: {
+          disabledDate: time => {
+            const beginDateVal = new Date(this.formInline.stime).getTime()
+            if (beginDateVal) {
+              return time.getTime() < beginDateVal - 0
+            }
+          }
+        }
+      }
+    },
+    methods: {
+      handleCheckAllChange(val) {
+        const siteId = [];
+        this.siteData.forEach(item => {
+          siteId.push(item.site_id);
+        })
+        this.formInline.site_id = val ? siteId : [];
+        this.isIndeterminate = false;
+      },
+      sendPost(){
+        this.dialogEditFormVisible=true;
+      },
+      sendMail(){
+        const postData = toJsonData.JsonData(this.editMailForm);
+        Sales.sendMail(postData,this.orderId,this.token).then(data => {
+          console.log(data)
+          this.$message({
+            message: data.data.log,
+            type: 'success'
+          })
+          this.searchOrder();
+          this.closeDialog();
+        })
+      },
+      onEditorBlur(){//失去焦点事件
+      },
+      onEditorFocus(){//获得焦点事件
+      },
+      onEditorChange(){//内容改变事件
+      },
+      tableRowClassName(row, index) {
+        if(row.row.status === '完成' || row.row.status === '追回'){
+          return 'success-row';
+        }else if(row.row.status === '待验证') {
+          return 'verified-row'
+        }else if(row.row.status === '作废' || row.row.status === '退款') {
+          return 'abandoned-row'
+        }else if(row.row.status === '欺诈订单' || row.row.status === '问题订单' || row.row.status === '信息错误') {
+          return 'request-row'
+        }else if(row.row.status === '发货中') {
+          return 'printing-row'
+        }
+      },
+      handleSizeChange(val) {
+        this.pageSize = val;
+        this.searchLimitOrder(val);
+      },
+      payOrder() {
+        if(!this.isOrderPay) {
+          this.dialogTableType = 'pay';
+          this.dialogTableVisible = true;
+        }
+      },
+
+      goldDeatilLink(index,row){
+        this.orderId = row.order_id;
+        this.$router.push({
+          path: "/sales/first-hand/gold-order-detail",
+          query: {
+            id: this.orderId
+          }
+        })
+      },
+      handleSignOrder() {
+        if(this.isDisabled) {
+        }else{
+          this.signOrder();
+          this.dialogTableType = 'handle';
+          this.dialogTableVisible = true;
+        }
+      },
+      handleOrder() {
+        if(this.isFreed) {
+        }else{
+          this.dialogTableType = 'handle';
+          this.dialogTableVisible = true;
+        }
+      },
+      searchLimitOrder(val){
+        const postData = toJsonData.JsonData(this.formInline);
+        Sales.searchLimitOrder(postData,val,this.currentPage,this.token).then(data => {
+          this.tableData = data.data;
+          this.totalCount = parseInt(data.count)
+          this.orderAmount = data.amount + '(USD)';
+          this.usdAmount = data.USD + 'USD';
+          this.cadAmount = data.CAD +'CAD';
+          this.audAmount = data.AUD + 'AUD';
+          this.eurAmount = data.EUR + 'EUR';
+          this.youhuiAmount = data.youhui + 'USD'
+        })
+      },
+      handleCurrentChange(val) {
+        this.currentPage = val
+        this.searchPageOrder(val);
+      },
+      searchPageOrder(val) {
+        const postData = toJsonData.JsonData(this.formInline);
+        Sales.searchLimitOrder(postData,this.pageSize,val,this.token).then(data => {
+          this.tableData = data.data;
+          this.totalCount = parseInt(data.count)
+          this.orderAmount = data.amount + '(USD)';
+          this.usdAmount = data.USD + 'USD';
+          this.cadAmount = data.CAD +'CAD';
+          this.audAmount = data.AUD + 'AUD';
+          this.eurAmount = data.EUR + 'EUR';
+          this.youhuiAmount = data.youhui + 'USD'
+        })
+      },
+      handleCheckGameAllChange(val) {
+        const games = [];
+        this.gameData.forEach(item => {
+          games.push(item.game_id);
+        })
+        this.formInline.games = val ? games : [];
+        this.isIndeterminate = false;
+      },
+      handleCheckPaymentAllChange(val){
+        const code = [];
+        this.paymentData.forEach(item => {
+          code.push(item.code);
+        })
+        this.formInline.code= val ? code:[];
+        this.isIndeterminate = false;
+      },
+      changeSelect() {
+
+      },
+      rightClick(row, column, e) {
+        e.preventDefault();
+        this.publicMenu(e);
+        this.orderId = row.order_id;
+        this.adminId = row.admin_id;
+        this.isDisabled = false;
+        this.isFreed = true;
+        this.isOrderPay = true;
+        this.mandatoryReceipt = true;
+        const adminId = this.token.split('_')[0];
+        if(row.admin_id){
+          this.isDisabled = true;
+          if(row.admin_id == adminId) {
+            this.isFreed = false;
+            if(row.status == '未支付') {
+              this.isOrderPay = false;
+            }
+          }else {
+            this.mandatoryReceipt = false;
+          }
+        }
+        this.handleOrderForm={
+          order_number: row.order_number,
+          amount:row.amount,
+          status:row.status,
+          order_no:row.order_no,
+          service:row.service,
+          note:''
+        }
+        this.editMailForm={
+          order_number:row.order_number,
+          email:row.email,
+          title:'',
+          content:''
+        }
+        this.getOrderStatus();
+        this.optionVisible = true;
+      },
+      getOrderStatus() {
+        Sales.getOrderStatus(this.orderId, this.token).then(data=> {
+          this.handleStatusData = data.data;
+        })
+      },
+      closeMenu() {
+        this.optionVisible = false
+      },
+      closeDialog() {
+        this.dialogTableVisible = false;
+        this.dialogEditFormVisible = false;
+      },
+      handleGoldOrder(row) {
+        const postData = toJsonData.JsonData(this.handleOrderForm);
+        const isHandle = this.dialogTableType === 'handle'
+        if(isHandle){
+          Sales.handleGoldOrder(postData,this.orderId,this.token).then(data => {
+            this.$message({
+              message: data.data.log,
+              type: 'success'
+            })
+            this.searchOrder();
+            this.closeDialog();
+          })
+        }else{
+          Sales.payOrder(postData,this.orderId, this.token).then(data => {
+            this.$message({
+              message: data.data.log,
+              type: 'success'
+            })
+            this.searchOrder();
+            this.closeDialog();
+          })
+        }
+
+      },
+      publicMenu(e){
+        const menuMinWidth = 105
+        const offsetLeft = this.$el.getBoundingClientRect().left // container margin left
+        const offsetWidth = this.$el.offsetWidth // container width
+        const maxLeft = offsetWidth - menuMinWidth // left boundary
+        const left = e.clientX - offsetLeft + 15 // 15: margin right
+        if (left > maxLeft) {
+          this.left = maxLeft
+        } else {
+          this.left = left
+        }
+        this.top = e.pageY - 80
+      },
+      signOrder() {
+        if(this.isDisabled) {
+        }else{
+          Sales.signOrder(this.orderId,this.token).then(data => {
+            this.$message({
+              message: data.data.log,
+              type: 'success'
+            })
+            this.searchOrder();
+          })
+        }
+      },
+      mandatoryReceiptOrder() {
+        if(this.mandatoryReceipt) {
+        }else{
+          Sales.mandatoryReceiptOrder(this.orderId,this.token).then(data => {
+            this.$message({
+              message: data.data.log,
+              type: 'success'
+            })
+            this.searchOrder();
+          })
+        }
+      },
+      freedOrder() {
+        if(this.isFreed) {
+        }else{
+          Sales.freedOrder(this.orderId,this.token).then(data => {
+            this.$message({
+              message: data.data.log,
+              type: 'success'
+            })
+            this.searchOrder();
+          })
+        }
+      },
+      searchOrder() {
+        const postData = toJsonData.JsonData(this.formInline);
+        // this.currentPage = 1;
+        Sales.searchLimitOrder(postData,this.pageSize,this.currentPage,this.token).then(data => {
+          this.tableData = data.data;
+          this.totalCount = parseInt(data.count)
+          this.orderAmount = data.amount + '(USD)';
+          this.usdAmount = data.USD + 'USD';
+          this.cadAmount = data.CAD +'CAD';
+          this.audAmount = data.AUD + 'AUD';
+          this.eurAmount = data.EUR + 'EUR';
+          this.youhuiAmount = data.youhui + 'USD'
+        })
+      },
+      printOrder() {
+        const postData = toJsonData.JsonData(this.formInline);
+        console.log(this.formInline)
+        this.currentPage = 1;
+        window.location.href=
+          '/order/dayin?stime='+this.formInline.stime+'&ltime='+this.formInline.ltime+'&site_id='+this.formInline.site_id+
+          '&games='+this.formInline.games+'&code='+this.formInline.code+'&which_select='+this.formInline.which_select+
+          '&select_value='+this.formInline.select_value+'&is_coupon='+this.formInline.is_coupon+'&status='+this.formInline.status+
+          '&num='+this.pageSize+'&p='+this.currentPage+'&token='+this.token;
+        // Sales.printOrder(postData,this.token).then(data => {
+        //   this.tableData = data.data;
+        //   this.totalCount = parseInt(data.count)
+        //   this.orderAmount = data.amount + '(USD)';
+        //   this.usdAmount = data.USD + 'USD';
+        //   this.cadAmount = data.CAD +'CAD';
+        //   this.audAmount = data.AUD + 'AUD';
+        //   this.eurAmount = data.EUR + 'EUR';
+        //   this.youhuiAmount = data.youhui + 'USD'
+        // })
+
+      },
+
+      getAllstatus() {
+        Sales.getAllstatus(this.token).then(data => {
+            this.statusData = data.data
+        })
+      },
+      handleCheckedSiteChange(value) {
+        // let checkedCount = value.length;
+        // this.checSitekAll = checkedCount === this.siteData.length;
+        // this.isIndeterminate = checkedCount > 0 && checkedCount < this.siteData.length;
+      },
+      getGameIndex() {
+        this.formInline.games = [];
+        SystemManager.getGameIndex(this.token).then(data => {
+          this.gameData=data.data
+        })
+      },
+      getSiteIndex() {
+        SystemManager.getSiteIndex(this.token).then(data => {
+          this.siteData=data.data
+        })
+      },
+      getPaymentMethod() {
+        SystemManager.getPaymentMethod(this.token).then(data => {
+          this.paymentData = data.data;
+        })
+      },
+      getOrderIndex() {
+        Sales.getOrderIndex(this.token).then(data => {
+          this.tableData = data.data;
+          this.totalCount = parseInt(data.count)
+          this.orderAmount = data.amount + '(USD)';
+          this.usdAmount = data.USD + 'USD';
+          this.cadAmount = data.CAD +'CAD';
+          this.audAmount = data.AUD + 'AUD';
+          this.eurAmount = data.EUR + 'EUR';
+          this.youhuiAmount = data.youhui + 'USD'
+        })
+      }
+    },
+    components: {
+      quillEditor
+    },
+    created() {
+      this.getSiteIndex();
+      this.getGameIndex();
+      this.getPaymentMethod();
+      this.getAllstatus();
+      // this.getOrderIndex();
+      this.searchOrder();
+
+      // this.formInline.which_select = this.selectData[0].title;
+    },
+    watch: {
+      optionVisible(value) {
+        if(value) {
+          document.body.addEventListener('click', this.closeMenu)
+        }else{
+          document.body.removeEventListener('click', this.closeMenu)
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+   .el-popper{
+    max-height: 300px;
+    overflow-y:scroll;
+    overflow-x: visible;
+  }
+   .pagination-part{
+     display: flex;
+     align-items: center;
+     margin-bottom: 20px;
+   }
+   .order-part{
+     padding-left: 20px;
+     color: #0a76a4;
+   }
+   .el-table .success-row{
+     color: #45f58d;
+   }
+   .el-table .verified-row{
+     color: #ff8d00;
+   }
+   .el-table .request-row{
+     color: red;
+   }
+   .el-table .abandoned-row{
+     color: #c5c9d0;
+   }
+   .el-checkbox{
+    display: block;
+  }
+   .self-row{
+     color: #af5b5e;
+   }
+   .isFreed{
+     color: #c5c9d0;
+   }
+   .mandatoryReceipt{
+     color: #c5c9d0;
+   }
+   .isOrderPay{
+     color: #c5c9d0;
+   }
+   .el-table .printing-row{
+     color: #8b3e8a;
+   }
+  .isDisabled{
+    color: #c5c9d0;
+  }
+   .ql-snow .ql-picker{
+     height: 36px !important;
+   }
+   .table-div:after{
+     content: ".";
+     display: block;
+     height: 200px;
+     clear: both;
+     visibility: hidden;
+   }
+</style>

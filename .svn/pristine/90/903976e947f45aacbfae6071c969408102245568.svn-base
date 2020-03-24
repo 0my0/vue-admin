@@ -1,0 +1,170 @@
+import request from '@/utils/request'
+
+class Sales {
+  getCouponIndex(token) {
+    return request({
+      url:'/coupon/index',
+      method:'get',
+      params: { token }
+    })
+  }
+  searchCoupon(site_id, game_id, token) {
+    return request({
+      url: '/coupon/index',
+      method: 'get',
+      params: { site_id,game_id,token }
+    })
+  }
+  changeCoupon(site_id, token) {
+    return request({
+      url: '/coupon/change_site',
+      method: 'get',
+      params:{site_id, token}
+    })
+  }
+
+  addCoupon(data,token) {
+    return request({
+      url: `/coupon/create?token=${token}`,
+      method:'post',
+      data
+    })
+  }
+
+  deleteCoupon(coupon_id,token){
+    return request({
+      url:'/coupon/delete',
+      method:'get',
+      params: {
+        coupon_id, token
+      }
+    })
+  }
+
+  getSiteUser(token) {
+    return request({
+      url: '/member/index',
+      method:'get',
+      params: {token}
+    })
+  }
+
+  searchSiteUser(data, token) {
+    return request({
+      url:`/member/index?token=${token}`,
+      method:'post',
+      data
+    })
+  }
+
+
+  searchLimitSite(data,num,p, token){
+    return request({
+      url:`/member/index?num=${num}&p=${p}&token=${token}`,
+      method:'post',
+      data
+    })
+  }
+
+  editPass(data,uid,token) {
+    return request({
+      url: `/member/edit?uid=${uid}&token=${token}`,
+      method:'post',
+      data
+    })
+  }
+
+  getAllstatus(token) {
+    return request({
+      url:'/order/get_allstatus',
+      method:'get',
+      params:{token}
+    })
+  }
+
+  getOrderIndex(token) {
+    return request({
+      url:'/order/index',
+      method:'get',
+      params: {token}
+    })
+  }
+
+  searchOrder(data, token){
+    return request({
+      url:`/order/index?token=${token}`,
+      method:'post',
+      data
+    })
+  }
+  searchLimitOrder(data, num, p, token) {
+    return request({
+      url:`/order/index?num=${num}&p=${p}&token=${token}`,
+      method:'post',
+      data
+    })
+  }
+
+  signOrder(order_id, token){
+    return request({
+      url:'/order/qianshou',
+      method:'get',
+      params: {order_id, token}
+    })
+  }
+  mandatoryReceiptOrder(order_id, token) {
+    return request({
+      url:'/order/qiangzhi',
+      method:'get',
+      params:{
+        order_id, token
+      }
+    })
+  }
+  freedOrder(order_id, token) {
+    return request({
+      url:'/order/shifang',
+      method:'get',
+      params:{
+        order_id, token
+      }
+    })
+  }
+
+  getOrderStatus(order_id, token) {
+    return request({
+      url:'/order/get_status',
+      method:'get',
+      params: {
+        order_id, token
+      }
+    })
+  }
+
+  handleGoldOrder(data,order_id, token) {
+    return request({
+      url:`/order/handle?order_id=${order_id}&token=${token}`,
+      method:'post',
+      data
+    })
+  }
+
+  payOrder(data,order_id, token) {
+    return request({
+      url:`/order/pay?order_id=${order_id}&token=${token}`,
+      method: 'post',
+      data
+    })
+  }
+
+  postOrderData(data,token) {
+    return request({
+      url: `/order/get_order?token=${token}`,
+      method:'post',
+      data
+    })
+  }
+
+}
+
+export default new Sales();

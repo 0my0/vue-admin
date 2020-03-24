@@ -1,0 +1,195 @@
+<template>
+  <div>
+    <section class="app-main">
+      <transition name="fade-transform" mode="out-in">
+        <keep-alive :include="cachedViews">
+          <router-view :key="key" />
+        </keep-alive>
+      </transition>
+    </section>
+  </div>
+
+</template>
+
+<script>
+  import { getToken } from '@/utils/auth';
+  import Sales from '@/api/sales';
+  import toJsonData from '@/api/jsonformdata'
+export default {
+  name: 'AppMain',
+  data(){
+    return{
+      token: getToken(),
+      websock:null
+    }
+  },
+  computed: {
+    cachedViews() {
+      return this.$store.state.tagsView.cachedViews
+    },
+    key() {
+      return this.$route.path
+    }
+  },
+  methods: {
+    initWebSocket() {
+      const wsuri = "ws://47.91.87.125:2346?token=123";
+      this.websock = new WebSocket(wsuri);
+      this.websock.onmessage = this.websocketonmessage;
+      this.websock.onopen = this.websocketonopen;
+      this.websock.onerror = this.websocketonerror;
+      this.websock.onclose = this.websocketclose;
+    },
+    showMsgNotification(title, msg) {
+      var Notification = window.Notification || window.mozNotification || window.webkitNotification;
+      if (Notification) {
+        if (Notification.permission == "granted") {  //已经允许通知
+          var instance = new Notification(title, {
+            body: msg,
+            icon: "/static/images/ico.jpg",
+          });
+          instance.onclick = function () {
+            //$('body').css({'background': 'red'});
+            //console.log('onclick');
+            instance.close();
+          };
+          instance.onerror = function () {
+            //console.log('onerror');
+          };
+          instance.onshow = function () {
+            // 窗口显示 播放音频
+            var audio = new Audio("./10418.wav");
+            audio.play();
+            // 窗口显示3S后关闭
+            setTimeout(function(){
+              notify.close();
+            },3000);
+          };
+          instance.onclose = function () {
+            //console.log('onclose');
+          };
+        } else {
+          //第一次询问或已经禁止通知(如果用户之前已经禁止显示通知，那么浏览器不会再次询问用户的意见，Notification.requestPermission()方法无效)
+          Notification.requestPermission(function (status) {
+            //用户允许
+            if (status === "granted") {
+              var instance = new Notification(title, {
+                body: msg,
+                icon: "images/reload.png"
+              });
+
+              instance.onclick = function () {
+                // Something to do
+              };
+              instance.onerror = function () {
+                // Something to do
+              };
+              instance.onshow = function () {
+                // Something to do
+              };
+              instance.onclose = function () {
+                // Something to do
+              };
+              //用户禁止
+            } else {
+              return false
+            }
+          });
+        }
+      } else {
+        //不支持(IE等)
+        var index = 0;
+        clearInterval(timer);
+        timer = setInterval(function () {
+          if (index % 2) {
+            $('title').text('【　　　】' + title);//这里是中文全角空格，其他不行
+          } else {
+            $('title').text('【新消息】' + title);
+          }
+          index++;
+
+          if (index > 20) {
+            clearInterval(timer);
+          }
+        }, 500);
+      }
+    },
+    websocketonmessage(e) {
+      //SOCKET收到信息
+      const redata = JSON.parse(e.data);
+      //this.showMsgNotification('新订单', redata.msg)
+      switch (redata.type) {
+        case 'self':
+          localStorage.setItem('client_id', redata.msg)
+          break
+        case 'ping':
+          console.log('ping')
+          break
+        case 'logout':
+          console.log('logout' + redata.msg)
+        case 'ORDER':
+          console.log('add order ', redata.orderInfo)
+          const orderDetail = toJsonData.JsonData(redata.orderInfo);
+          Sales.postOrderData(orderDetail,this.token).then(data => {
+            this.showMsgNotification('新订单', redata.orderInfo.order_no)
+          })
+
+      }
+    },
+    websocketonopen() {
+      console.log('发送数据')
+      let actions = {"type":"ping"};
+      setInterval(this.ping,3000);
+    },
+    websocketonerror() {
+      this.initWebSocket();
+    },
+    websocketsend(Data){
+      this.websock.send(Data);
+    },
+    websocketclose(e){
+      console.log('断开连接',e)
+    },
+    ping(){
+      this.websock.send('{"type":"ping"}');
+    }
+  },
+  created() {
+    this.initWebSocket();
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.app-main {
+  /* 50= navbar  50  */
+  min-height: calc(100vh - 50px);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.fixed-header+.app-main {
+  padding-top: 50px;
+}
+
+.hasTagsView {
+  .app-main {
+    /* 84 = navbar + tags-view = 50 + 34 */
+    min-height: calc(100vh - 84px);
+  }
+
+  .fixed-header+.app-main {
+    padding-top: 84px;
+  }
+}
+</style>
+
+<style lang="scss">
+// fix css style bug in open el-dialog
+.el-popup-parent--hidden {
+  .fixed-header {
+    padding-right: 15px;
+  }
+}
+</style>

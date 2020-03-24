@@ -1,0 +1,16 @@
+<template>
+  <div id="app">
+    <keep-alive v-if="$route.meta.keepAlive == true">
+      <router-view>
+      </router-view>
+    </keep-alive>
+    <router-view></router-view>
+  </div>
+</template>
+
+<script>
+  import notification from 'notification-koro1';
+export default {
+  name: 'App',
+}
+</script>

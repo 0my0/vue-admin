@@ -1,0 +1,985 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2799b2fa-8e78-41d6-8b0d-4793b325ed59" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/api/jsondata.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/jsonformdata.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/sales.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/system-manager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/router/modules/accountManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/router/modules/dispatcherManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/router/modules/financialManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/router/modules/inventoryManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/router/modules/mailManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/router/modules/mineManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/router/modules/otherManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/router/modules/purchaseManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/router/modules/reportManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/router/modules/salesManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/router/modules/seoTool.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/router/modules/systemManager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/account/account-charging-card.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/account/account-feedback.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/account/account-type.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/account/account-usage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/account/email-account.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/account/email-demand.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/account/email-pseudonym.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/account/game-account.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/account/game-demand.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/account/recharge-task.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/account/wow-account-unlock.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/dispatcher/device-transceiver.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/dispatcher/domestic-second-hand-delivery.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/dispatcher/first-hand-query.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/dispatcher/foreign-second-hand-query.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/dispatcher/gold-dispatcher.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/dispatcher/in-out-manager.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/dispatcher/receipt-review.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/dispatcher/send-receive-requests.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/financial/financial-fund-account/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/financial/foreign-recharge/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/financial/order-payment/foreign-gold-purchase-payment/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/financial/order-payment/gold-purchase-payment/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/financial/order-payment/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/financial/order-payment/point-purchase-payment/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/financial/order-refund/domestic-second-refund/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/financial/order-refund/foreign-second-refund/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/financial/order-refund/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/financial/order-refund/point-card-receipt/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/financial/sales-station-account/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/gold-inventory/gold-account-list-limit/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/gold-inventory/gold-account-list/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/gold-inventory/gold-account-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/gold-inventory/gold-account-statistics/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/gold-inventory/gold-announce-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/gold-inventory/gold-brush-online-config/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/gold-inventory/gold-guild-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/gold-inventory/gold-index-statistics/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/gold-inventory/gold-inventory-inventory/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/gold-inventory/gold-inventory-list/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/gold-inventory/gold-rebate-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/gold-inventory/gold-role-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/gold-inventory/gold-workstation-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/gold-inventory/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/point-card-inventory/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/point-card-inventory/inventory-purchase-storage/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/point-card-inventory/point-card-inventory-list/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/inventory/point-card-inventory/point-inventory-inventory/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/mail/bulk-mail-account-import.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/mail/mail-body-manager.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/mail/mail-user-manager.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/mail/send-mail-manager.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/mail/sent-mail.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/mine/account-requirement.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/mine/email-requirement.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/mine/grab-single.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/mine/mine-mail.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/mine/mine-point-sales.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/mine/workstation-message.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/other/Ebay-store-manager.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/other/blacklist.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/other/foreign-collection.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/other/game-server-customization.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/other/game-server-mapping.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/other/message-board.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/boosting-business/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/boosting-business/issue-order-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/boosting-business/studio-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/foreign-gold/foreign-purchase-point-order-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/foreign-gold/foreign-purchase-supplier-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/foreign-gold/foreign-quantity-price-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/foreign-gold/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/gold-business/comparator-demand-release/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/gold-business/comparator-guarantee-order/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/gold-business/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/gold-business/purchase-order-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/gold-business/quantity-price-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/gold-business/supplier-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/gold-business/supplier-price-setting/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/purchase-point-card-business/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/purchase-point-card-business/purchase-point-order-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/purchase/purchase-point-card-business/purchase-supplier-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/30minute-completion-order.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/customer-return-rate.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/domestic-second-hand-finance.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/domestic-second-hand-payment.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/domestic-second-hand-statistics.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/first-hand-sales.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/first-hand-verification-statistics.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/foreign-first-hand-finance.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/foreign-purchase-order-statistics.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/foreign-second-hand-finance.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/foreign-second-hand-payment.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/game-account-statistics.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/gold-sales-delivery.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/inventory-change.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/new-old-customer-statistics.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/personnel-statistics.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/point-card-sale.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/purchase-order-statistics.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/receipt-payment-report.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/receipt-report.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/sale-order-completion-statistics.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/shipping-statistics.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/report/transceiver-performance-statistics.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/first-hand/boosting-order-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/first-hand/boosting-product-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/first-hand/cdk-order-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/first-hand/cdk-product-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/first-hand/coupon-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/first-hand/equipment-order-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/first-hand/equipment-product-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/first-hand/gold-order-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/first-hand/gold-product-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/first-hand/goldordermanager/gold-order-detail.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/first-hand/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/first-hand/order-verification/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/first-hand/site-user-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/first-hand/tel-mail-log/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/point-card-business/client-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/point-card-business/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/point-card-business/item-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/point-card-business/order-inquire/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/point-card-business/order-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/second-hand/domestic-second-hand-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/second-hand/domestic-second-hand-order-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/second-hand/foreign-second-hand-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/second-hand/foreign-second-hand-offer-config/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/second-hand/foreign-second-hand-offer-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/second-hand/foreign-second-hand-order-manager/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/sales/second-hand/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/seo/seo-link-manager.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/seo/seo-resource-manager.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/system-manager/currency-exchange-rate.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/system-manager/department.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/system-manager/game-server.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/system-manager/log.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/system-manager/mail-account.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/system-manager/payment-method-config.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/system-manager/purchase-site-label.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/system-manager/purchase-site-news.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/system-manager/sales-site-label.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/system-manager/sales-site-news.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/system-manager/shipping-mode-config.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/system-manager/site-file-config.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/system-manager/vpn-config.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/system-manager/web-config.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/system-manager/webconfig/game-config.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.development" beforeDir="false" afterPath="$PROJECT_DIR$/.env.development" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/role.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/role.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/directive/el-drag-dialog/drag.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/directive/el-drag-dialog/drag.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/icons/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/icons/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/components/AppMain.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/AppMain.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/Navbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/components/TagsView/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/components/TagsView/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layout/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/permission.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/permission.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/modules/charts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/modules/charts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/getters.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/getters.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/modules/permission.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/permission.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/modules/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/dashboard/admin/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/admin/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/dashboard/editor/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/editor/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/dashboard/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/dashboard/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/login/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/permission/components/SwitchRoles.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/permission/components/SwitchRoles.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/permission/role.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/permission/role.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/redirect/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/redirect/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue.config.js" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/layout/components/AppMain.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="332">
+              <caret line="85" column="42" lean-forward="true" selection-start-line="85" selection-start-column="42" selection-end-line="85" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/views/sales/first-hand/goldordermanager/gold-order-detail.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="93">
+              <caret line="360" column="6" lean-forward="true" selection-start-line="360" selection-start-column="6" selection-end-line="360" selection-end-column="6" />
+              <folding>
+                <element signature="n#el-form#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#style#0;n#el-input#0;n#el-form-item#0;n#el-form#0;n#el-tab-pane#0;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#el-table#0;n#div#0;n#el-tab-pane#0;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#style#0;n#el-table#0;n#div#0;n#el-tab-pane#0;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#el-table#0;n#div#0;n#el-tab-pane#1;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#el-table#0;n#div#0;n#el-tab-pane#2;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#el-tab-pane#3;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#style#0;n#el-table#0;n#div#0;n#el-tab-pane#3;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#el-tab-pane#4;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#el-tab-pane#4;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/api/sales.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="269">
+              <caret line="176" column="15" selection-start-line="176" selection-start-column="2" selection-end-line="176" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/views/sales/first-hand/gold-order-manager/index.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="411" column="44" lean-forward="true" selection-start-line="411" selection-start-column="44" selection-end-line="411" selection-end-column="44" />
+              <folding>
+                <element signature="n#style#0;n#el-table#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#span#0;n#template#0;n#el-table-column#1;n#el-table#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>getOrderIndex</find>
+      <find>isHidden</find>
+      <find>dataArr2</find>
+      <find>arr</find>
+      <find>付款</find>
+      <find>emailList</find>
+      <find>address_name</find>
+      <find>payData</find>
+      <find>uploadData</find>
+      <find>orderId</find>
+      <find>uploadActionUrl</find>
+      <find>upload</find>
+      <find>table</find>
+      <find>tableData</find>
+      <find>error</find>
+      <find>socket</find>
+      <find>window.websocket</find>
+      <find>initWebSocket</find>
+      <find>handlePreview</find>
+      <find>断开连接</find>
+      <find>that</find>
+      <find>websocketonopen</find>
+      <find>websocketonerror</find>
+      <find>内容</find>
+      <find>reconnect</find>
+      <find>付款记录</find>
+      <find>localhost:9527</find>
+      <find>websock</find>
+      <find>editOrderData</find>
+      <find>notify</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>@/views</replace>
+      <replace>tableData</replace>
+      <replace>dialogFormVisible</replace>
+      <replace>editPaymentForm</replace>
+      <replace>createPaymentMethod</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>D:\vueProject\admin\vue-element-admin\src</dir>
+      <dir>D:\vueProject\admin\vue-element-admin</dir>
+      <dir>E:\vueProject\admin\vue-element-admin\src\router</dir>
+      <dir>E:\vueProject\admin\vue-element-admin\src\views\login</dir>
+      <dir>E:\vueProject\admin\vue-element-admin\src\store</dir>
+      <dir>E:\vueProject\admin\vue-element-admin\src\styles</dir>
+      <dir>E:\vueProject\admin\vue-element-admin\src\utils</dir>
+      <dir>E:\vueProject\admin\vue-element-admin\src\api</dir>
+      <dir>E:\vueProject\admin\vue-element-admin\src\views\report</dir>
+      <dir>E:\vueProject\admin\vue-element-admin\src\router\modules</dir>
+      <dir>E:\vueProject\admin\vue-element-admin\src\views</dir>
+      <dir>E:\vueProject\admin\vue-element-admin\src\layout\components</dir>
+      <dir>E:\vueProject\admin\vue-element-admin\src\views\sales</dir>
+      <dir>E:\vueProject\admin\vue-element-admin\src\views\system-manager</dir>
+      <dir>E:\vueProject\admin\vue-element-admin\src</dir>
+      <dir>E:\vueProject\admin\vue-element-admin\src\components</dir>
+      <dir>E:\vueProject\admin\vue-element-admin</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/244 2.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/244.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/index 4.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/244 3.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/index 4.css" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/244 5.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/index 5.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/index 6.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/244 6.html" />
+        <option value="$PROJECT_DIR$/src/api/system-manager.js" />
+        <option value="$PROJECT_DIR$/src/views/system-manager/payment-method-config.vue" />
+        <option value="$PROJECT_DIR$/src/views/sales/first-hand/site-user-manager/index.vue" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/gold.html" />
+        <option value="$USER_HOME$/Desktop/aa/public-func.js" />
+        <option value="$PROJECT_DIR$/src/views/sales/first-hand/coupon-manager/index.vue" />
+        <option value="$PROJECT_DIR$/src/layout/components/Navbar.vue" />
+        <option value="$PROJECT_DIR$/src/views/login/index.vue" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/poeitems.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/items.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/items 2.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/goodfrontstyle.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/296.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/296 2.html" />
+        <option value="$USER_HOME$/Desktop/296.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/css.css" />
+        <option value="$PROJECT_DIR$/src/layout/index.vue" />
+        <option value="$PROJECT_DIR$/src/views/system-manager/game-server.vue" />
+        <option value="$PROJECT_DIR$/src/views/system-manager/department.vue" />
+        <option value="$PROJECT_DIR$/src/layout/components/TagsView/index.vue" />
+        <option value="$PROJECT_DIR$/src/directive/el-drag-dialog/drag.js" />
+        <option value="$PROJECT_DIR$/src/views/system-manager/currency-exchange-rate.vue" />
+        <option value="$PROJECT_DIR$/src/views/system-manager/web-config.vue" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/index 2.css" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/index 3.css" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/233.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/header.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/footer.html" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/public_wow.css" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/index.css" />
+        <option value="$PROJECT_DIR$/src/router/modules/systemManager.js" />
+        <option value="$PROJECT_DIR$/src/main.js" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/index.html" />
+        <option value="$PROJECT_DIR$/src/router/index.js" />
+        <option value="$PROJECT_DIR$/src/router/modules/salesManager.js" />
+        <option value="$PROJECT_DIR$/src/App.vue" />
+        <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/index 2.html" />
+        <option value="$USER_HOME$/Desktop/public-func.js" />
+        <option value="$PROJECT_DIR$/src/api/sales.js" />
+        <option value="$PROJECT_DIR$/src/views/sales/first-hand/gold-order-manager/index.vue" />
+        <option value="$PROJECT_DIR$/src/views/sales/first-hand/goldordermanager/gold-order-detail.vue" />
+        <option value="$PROJECT_DIR$/src/layout/components/AppMain.vue" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="98" />
+    <option name="y" value="23" />
+    <option name="width" value="1852" />
+    <option name="height" value="1076" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="mock" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="custom-theme" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="router" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="styles" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="sales" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="system-manager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="system-manager" type="462c0819:PsiDirectoryNode" />
+              <item name="webconfig" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vue-element-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vue-element-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="theme" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="editor.config.ad.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="D:\vueProject\admin\vue-element-admin\node_modules\prettier" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.1.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\vueProject\admin\vue-element-admin\src\views\system-manager\webconfig" />
+      <recent name="E:\vueProject\admin\vue-element-admin\src\views\system-manager" />
+      <recent name="E:\vueProject\admin\vue-element-admin\src\views\system-manager\web-config" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\vueProject\admin\vue-element-admin\src\api" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2799b2fa-8e78-41d6-8b0d-4793b325ed59" name="Default Changelist" comment="" />
+      <created>1566955505574</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1566955505574</updated>
+      <workItem from="1566955506939" duration="713000" />
+      <workItem from="1567405584668" duration="10743000" />
+      <workItem from="1567473425198" duration="2048000" />
+      <workItem from="1573002202549" duration="7978000" />
+      <workItem from="1573011758701" duration="10492000" />
+      <workItem from="1573088748764" duration="2317000" />
+      <workItem from="1573109063191" duration="6184000" />
+      <workItem from="1573115355666" duration="6926000" />
+      <workItem from="1573175798135" duration="20074000" />
+      <workItem from="1573434415473" duration="20696000" />
+      <workItem from="1573521756200" duration="30236000" />
+      <workItem from="1573607446776" duration="30751000" />
+      <workItem from="1573696745845" duration="26424000" />
+      <workItem from="1573780675096" duration="26784000" />
+      <workItem from="1573875541819" duration="10745000" />
+      <workItem from="1574039549250" duration="26398000" />
+      <workItem from="1574127063918" duration="16735000" />
+      <workItem from="1574217193365" duration="8904000" />
+      <workItem from="1574319849278" duration="1443000" />
+      <workItem from="1574904295362" duration="897000" />
+      <workItem from="1574905785896" duration="2923000" />
+      <workItem from="1574989557287" duration="2855000" />
+      <workItem from="1576200176825" duration="30546000" />
+      <workItem from="1576285750945" duration="28584000" />
+      <workItem from="1576459385325" duration="20713000" />
+      <workItem from="1576544427703" duration="14887000" />
+      <workItem from="1576633154210" duration="27635000" />
+      <workItem from="1576717434018" duration="26101000" />
+      <workItem from="1576804582180" duration="27078000" />
+      <workItem from="1577062938606" duration="199000" />
+      <workItem from="1577158006077" duration="15944000" />
+      <workItem from="1577235956793" duration="15877000" />
+      <workItem from="1577322355467" duration="13883000" />
+      <workItem from="1577408899219" duration="21696000" />
+      <workItem from="1577495483357" duration="17684000" />
+      <workItem from="1577668169163" duration="30132000" />
+      <workItem from="1577754584391" duration="11779000" />
+      <workItem from="1577928392243" duration="22472000" />
+      <workItem from="1578013452245" duration="17328000" />
+      <workItem from="1578272769790" duration="21518000" />
+      <workItem from="1578359167581" duration="23844000" />
+      <workItem from="1578445472166" duration="16385000" />
+      <workItem from="1578545732524" duration="9643000" />
+      <workItem from="1578618087823" duration="30649000" />
+      <workItem from="1578704451520" duration="29083000" />
+      <workItem from="1578877548959" duration="3257000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="750183000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="98" y="23" width="1852" height="1076" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18086283" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.10024155" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.5217391" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.26421404" />
+      <window_info anchor="bottom" id="TypeScript" order="11" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/css.css" />
+    <entry file="file://$PROJECT_DIR$/src/layout/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="43" column="14" lean-forward="true" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="14" />
+          <folding>
+            <element signature="e#534#582#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styles/index.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="203" column="24" lean-forward="true" selection-start-line="203" selection-start-column="24" selection-end-line="203" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/eslint-plugin-vue/lib/rules/comment-directive.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="55" column="46" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/vue/types/options.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="103" column="14" selection-start-line="103" selection-start-column="14" selection-end-line="103" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/element-ui/packages/date-picker/src/util/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/index 3.css" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/index 2.css" />
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="4292" column="36" selection-start-line="4292" selection-start-column="36" selection-end-line="4292" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/system-manager/game-server.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="79" selection-start-line="4" selection-start-column="79" selection-end-line="4" selection-end-column="97" />
+          <folding>
+            <element signature="n#style#0;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#2131#2180#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/55.html" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/233.html" />
+    <entry file="file://E:/qq/iconfont.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="46" selection-start-column="46" selection-end-column="46" />
+          <folding>
+            <element signature="e#146#5282#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/footer.html" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/header.html" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/public_wow.css" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/index.css" />
+    <entry file="file://$PROJECT_DIR$/src/router/modules/systemManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="119" column="13" lean-forward="true" selection-start-line="119" selection-start-column="13" selection-end-line="119" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/system-manager/web-config.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="22" column="18" selection-start-line="4" selection-start-column="6" selection-end-line="22" selection-end-column="18" />
+          <folding>
+            <element signature="n#style#0;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#span#0;n#template#0;n#el-table-column#0;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/vue-router/types/vue.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/router/modules/salesManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1449">
+          <caret line="69" column="33" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1008">
+          <caret line="420" column="2" lean-forward="true" selection-start-line="420" selection-start-column="2" selection-end-line="420" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#2488#4439#0" />
+            <element signature="e#4560#11366#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="8" lean-forward="true" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/vue-quill-editor/src/editor.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="945">
+          <caret line="46" column="7" selection-start-line="46" selection-start-column="7" selection-end-line="46" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/system-manager/webconfig/game-config.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="68" column="15" lean-forward="true" selection-start-line="68" selection-start-column="15" selection-end-line="68" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/custom-theme/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret column="260971" lean-forward="true" selection-start-column="260971" selection-end-column="260971" />
+          <folding>
+            <element signature="e#387319#387458#2" expanded="true" />
+            <element signature="e#391323#391462#2" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/goodfrontstyle.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="291" column="5" lean-forward="true" selection-start-line="291" selection-start-column="5" selection-end-line="291" selection-end-column="5" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/items.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="23" column="14" lean-forward="true" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/poeitems.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="210" column="21" lean-forward="true" selection-start-line="210" selection-start-column="21" selection-end-line="210" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="759">
+          <caret line="469" column="27" lean-forward="true" selection-start-line="469" selection-start-column="27" selection-end-line="469" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/poeitems 2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="136" column="16" lean-forward="true" selection-start-line="136" selection-start-column="16" selection-end-line="136" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/items 2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="647">
+          <caret line="467" column="43" selection-start-line="467" selection-start-column="40" selection-end-line="467" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/goodfrontstyle 2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="433" column="6" lean-forward="true" selection-start-line="433" selection-start-column="6" selection-end-line="433" selection-end-column="6" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/index 2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="458">
+          <caret line="209" column="30" lean-forward="true" selection-start-line="209" selection-start-column="30" selection-end-line="209" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/Mobile/public-func.js" />
+    <entry file="file://C:/project/gamems927/Public/js/public-func.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="123" column="5" lean-forward="true" selection-start-line="123" selection-start-column="5" selection-end-line="123" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/public-func.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="327" column="45" selection-start-line="327" selection-start-column="45" selection-end-line="327" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/role.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="706">
+          <caret line="38" column="1" lean-forward="true" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/directive/clipboard/clipboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="18235" column="30" lean-forward="true" selection-start-line="18235" selection-start-column="30" selection-end-line="18235" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/permission.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="31" column="3" lean-forward="true" selection-start-line="31" selection-start-column="3" selection-end-line="31" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env.development">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.eslintrc.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2885">
+          <caret line="26" column="27" lean-forward="true" selection-start-line="26" selection-start-column="27" selection-end-line="27" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="25" column="26" lean-forward="true" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="26" column="36" lean-forward="true" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vue.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="27" column="20" lean-forward="true" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/sales/first-hand/goldordermanager/gold-order-detail.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="360" column="6" lean-forward="true" selection-start-line="360" selection-start-column="6" selection-end-line="360" selection-end-column="6" />
+          <folding>
+            <element signature="n#el-form#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#style#0;n#el-input#0;n#el-form-item#0;n#el-form#0;n#el-tab-pane#0;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#el-table#0;n#div#0;n#el-tab-pane#0;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#style#0;n#el-table#0;n#div#0;n#el-tab-pane#0;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-table#0;n#div#0;n#el-tab-pane#1;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-table#0;n#div#0;n#el-tab-pane#2;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#el-tab-pane#3;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#style#0;n#el-table#0;n#div#0;n#el-tab-pane#3;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#el-tab-pane#4;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#el-tab-pane#4;n#el-tabs#0;n#el-tab-pane#0;n#el-tabs#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/sales/first-hand/gold-order-manager/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="411" column="44" lean-forward="true" selection-start-line="411" selection-start-column="44" selection-end-line="411" selection-end-column="44" />
+          <folding>
+            <element signature="n#style#0;n#el-table#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#span#0;n#template#0;n#el-table-column#1;n#el-table#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/sales.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="176" column="15" selection-start-line="176" selection-start-column="2" selection-end-line="176" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/layout/components/AppMain.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="85" column="42" lean-forward="true" selection-start-line="85" selection-start-column="42" selection-end-line="85" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

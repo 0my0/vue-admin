@@ -1,0 +1,313 @@
+<template>
+  <div class="navbar">
+    <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
+
+    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+
+    <div class="right-menu">
+      <template v-if="device!=='mobile'">
+        <search id="header-search" class="right-menu-item" />
+
+        <error-log class="errLog-container right-menu-item hover-effect" />
+
+        <screenfull id="screenfull" class="right-menu-item hover-effect" />
+
+        <div class="right-menu-item hover-effect" @click="refresh" >
+          <svg-icon icon-class="example" />
+        </div>
+        <el-tooltip content="Global Size" effect="dark" placement="bottom">
+          <size-select id="size-select" class="right-menu-item hover-effect" />
+        </el-tooltip>
+
+      </template>
+
+      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
+        <div class="avatar-wrapper">
+          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <i class="el-icon-caret-bottom" />
+        </div>
+        <el-dropdown-menu slot="dropdown">
+          <router-link to="/profile/index">
+            <el-dropdown-item>Profile</el-dropdown-item>
+          </router-link>
+          <router-link to="/">
+            <el-dropdown-item>Dashboard</el-dropdown-item>
+          </router-link>
+          <a target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">
+            <el-dropdown-item>Github</el-dropdown-item>
+          </a>
+          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
+            <el-dropdown-item>Docs</el-dropdown-item>
+          </a>
+          <el-dropdown-item divided>
+            <span style="display:block;" @click="logout">Log Out</span>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapGetters } from 'vuex'
+import Breadcrumb from '@/components/Breadcrumb'
+import Hamburger from '@/components/Hamburger'
+import ErrorLog from '@/components/ErrorLog'
+import Screenfull from '@/components/Screenfull'
+import SizeSelect from '@/components/SizeSelect'
+import Search from '@/components/HeaderSearch'
+import refresh from '@/api/user'
+import { getToken,removeToken } from '@/utils/auth'
+import router, { resetRouter } from '@/router'
+export default {
+  components: {
+    Breadcrumb,
+    Hamburger,
+    ErrorLog,
+    Screenfull,
+    SizeSelect,
+    Search
+  },
+  computed: {
+    ...mapGetters([
+      'sidebar',
+      'avatar',
+      'device'
+    ])
+  },
+  data(){
+    return{
+      token: getToken(),
+      websock:null
+    }
+  },
+  methods: {
+    toggleSideBar() {
+      this.$store.dispatch('app/toggleSideBar')
+    },
+    async logout() {
+      await this.$store.dispatch('user/logout')
+      // removeToken(this.token);
+      // commit('SET_TOKEN', '')
+      // commit('SET_ROLES', [])
+      // removeToken()
+      // resetRouter()
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    },
+    refresh() {
+      refresh(this.token).then(data => {
+        this.$message({
+          message: data.data.log,
+          type: 'success'
+        })
+      })
+    },
+    initWebSocket() {
+      const wsuri = "ws://47.91.87.125:2346?token=123";
+      this.websock = new WebSocket(wsuri);
+      this.websock.onmessage = this.websocketonmessage;
+      this.websock.onopen = this.websocketonopen;
+      this.websock.onerror = this.websocketonerror;
+      this.websock.onclose = this.websocketclose;
+    },
+    showMsgNotification(title, msg) {
+      var Notification = window.Notification || window.mozNotification || window.webkitNotification;
+      if (Notification) {
+        if (Notification.permission == "granted") {  //已经允许通知
+          var instance = new Notification(title, {
+            body: msg,
+            icon: "/static/images/ico.jpg",
+          });
+          instance.onclick = function () {
+            //$('body').css({'background': 'red'});
+            //console.log('onclick');
+            instance.close();
+          };
+          instance.onerror = function () {
+            //console.log('onerror');
+          };
+          instance.onshow = function () {
+            // 窗口显示 播放音频
+            var audio = new Audio("./10418.wav");
+            audio.play();
+            // 窗口显示3S后关闭
+            setTimeout(function(){
+              notify.close();
+            },3000);
+          };
+          instance.onclose = function () {
+            //console.log('onclose');
+          };
+        } else {
+          //第一次询问或已经禁止通知(如果用户之前已经禁止显示通知，那么浏览器不会再次询问用户的意见，Notification.requestPermission()方法无效)
+          Notification.requestPermission(function (status) {
+            //用户允许
+            if (status === "granted") {
+              var instance = new Notification(title, {
+                body: msg,
+                icon: "images/reload.png"
+              });
+
+              instance.onclick = function () {
+                // Something to do
+              };
+              instance.onerror = function () {
+                // Something to do
+              };
+              instance.onshow = function () {
+                // Something to do
+              };
+              instance.onclose = function () {
+                // Something to do
+              };
+              //用户禁止
+            } else {
+              return false
+            }
+          });
+        }
+      } else {
+        //不支持(IE等)
+        var index = 0;
+        clearInterval(timer);
+        timer = setInterval(function () {
+          if (index % 2) {
+            $('title').text('【　　　】' + title);//这里是中文全角空格，其他不行
+          } else {
+            $('title').text('【新消息】' + title);
+          }
+          index++;
+
+          if (index > 20) {
+            clearInterval(timer);
+          }
+        }, 500);
+      }
+    },
+    websocketonmessage(e) {
+      //SOCKET收到信息
+      const redata = JSON.parse(e.data);
+      //this.showMsgNotification('新订单', redata.msg)
+      switch (redata.type) {
+        case 'self':
+          localStorage.setItem('client_id', redata.msg)
+          break
+        case 'ping':
+          console.log('ping')
+          break
+        case 'logout':
+          console.log('logout' + redata.msg)
+        case 'ORDER':
+          console.log('add order')
+          this.showMsgNotification('新订单111', redata.orderInfo.order_no)
+      }
+    },
+    websocketonopen() {
+      console.log('发送数据')
+      let actions = {"type":"ping"};
+      setInterval(this.ping,3000);
+    },
+    websocketonerror() {
+      this.initWebSocket();
+    },
+    websocketsend(Data){
+      console.log('ping')
+      this.websock.send(Data);
+    },
+    websocketclose(e){
+      console.log('断开连接',e)
+    },
+    ping(){
+      console.log('ping')
+      this.websock.send('{"type":"ping"}');
+    }
+  },
+  created() {
+    this.initWebSocket();
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.navbar {
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+
+  .hamburger-container {
+    line-height: 46px;
+    height: 100%;
+    float: left;
+    cursor: pointer;
+    transition: background .3s;
+    -webkit-tap-highlight-color:transparent;
+
+    &:hover {
+      background: rgba(0, 0, 0, .025)
+    }
+  }
+
+  .breadcrumb-container {
+    float: left;
+  }
+
+  .errLog-container {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .right-menu {
+    float: right;
+    height: 100%;
+    line-height: 50px;
+
+    &:focus {
+      outline: none;
+    }
+
+    .right-menu-item {
+      display: inline-block;
+      padding: 0 8px;
+      height: 100%;
+      font-size: 18px;
+      color: #5a5e66;
+      vertical-align: text-bottom;
+
+      &.hover-effect {
+        cursor: pointer;
+        transition: background .3s;
+
+        &:hover {
+          background: rgba(0, 0, 0, .025)
+        }
+      }
+    }
+
+    .avatar-container {
+      margin-right: 30px;
+
+      .avatar-wrapper {
+        margin-top: 5px;
+        position: relative;
+
+        .user-avatar {
+          cursor: pointer;
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+        }
+
+        .el-icon-caret-bottom {
+          cursor: pointer;
+          position: absolute;
+          right: -20px;
+          top: 25px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+</style>
